@@ -2,11 +2,14 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { typeDefs } from "../backend/src/schema/typeDefs.js";
 import { resolvers } from "../backend/src/resolvers/index.js";
 import { connectDB } from "../backend/src/config/database.js";
 import { authenticate } from "../backend/src/middleware/auth.js";
 import { createEmployeeLoader } from "../backend/src/utils/dataloader.js";
+
+dotenv.config();
 
 let server = null;
 let dbConnected = false;
@@ -15,9 +18,17 @@ async function initServer() {
   if (server) return server;
 
   if (!dbConnected) {
-    await connectDB();
-    dbConnected = true;
-    console.log("Database connected successfully");
+    try {
+      if (!process.env.MONGODB_URI) {
+        throw new Error("MONGODB_URI environment variable is not set");
+      }
+      await connectDB();
+      dbConnected = true;
+      console.log("Database connected successfully");
+    } catch (error) {
+      console.error("Database connection error:", error);
+      throw error;
+    }
   }
 
   const apolloServer = new ApolloServer({
@@ -76,6 +87,14 @@ async function initServer() {
 }
 
 export default async function handler(req, res) {
-  const { app } = await initServer();
-  return app(req, res);
+  try {
+    const { app } = await initServer();
+    return app(req, res);
+  } catch (error) {
+    console.error("Server initialization error:", error);
+    return res.status(500).json({
+      error: "Internal Server Error",
+      message: error.message || "Failed to initialize server",
+    });
+  }
 }
