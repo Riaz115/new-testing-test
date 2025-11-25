@@ -1,5 +1,5 @@
-import { ArrowLeft, Mail, Calendar, BookOpen, Flag } from 'lucide-react';
-import { Button } from '../Button/Button';
+import { ArrowLeft, Mail, Calendar, BookOpen, Flag } from "lucide-react";
+import { Button } from "../Button/Button";
 
 interface Employee {
   id: string;
@@ -22,41 +22,47 @@ interface EmployeeDetailProps {
 
 export const EmployeeDetail = ({ employee, onBack }: EmployeeDetailProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-      <div className="p-6 border-b border-gray-200">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
         <Button
           variant="ghost"
           onClick={onBack}
-          className="mb-4"
+          className="mb-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2 inline" />
           Back to List
         </Button>
 
         <div className="flex items-start justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">{employee.name}</h2>
-            <div className="flex items-center gap-2 text-gray-600">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              {employee.name}
+            </h2>
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <Mail className="w-4 h-4" />
               <span>{employee.email}</span>
             </div>
           </div>
           <div className="flex gap-2">
             <span
-              className={`px-3 py-1 text-sm font-semibold rounded-full ${
-                employee.role === 'admin'
-                  ? 'bg-blue-100 text-blue-800'
-                  : 'bg-gray-100 text-gray-800'
+              className={`px-4 py-2 text-sm font-semibold rounded-full ${
+                employee.role === "admin"
+                  ? "bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white shadow-md"
+                  : "bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-600 dark:to-pink-600 text-white shadow-md"
               }`}
             >
               {employee.role}
             </span>
-            {employee.flagged && (
-              <span className="px-3 py-1 text-sm font-semibold rounded-full bg-red-100 text-red-800 flex items-center gap-1">
-                <Flag className="w-3 h-3" />
-                Flagged
-              </span>
-            )}
+            <span
+              className={`px-4 py-2 text-sm font-semibold rounded-full flex items-center gap-1 ${
+                employee.flagged
+                  ? "bg-gradient-to-r from-red-500 to-orange-500 dark:from-red-600 dark:to-orange-600 text-white shadow-md"
+                  : "bg-gradient-to-r from-green-500 to-emerald-500 dark:from-green-600 dark:to-emerald-600 text-white shadow-md"
+              }`}
+            >
+              {employee.flagged && <Flag className="w-3 h-3" />}
+              {employee.flagged ? "Flag" : "Active"}
+            </span>
           </div>
         </div>
       </div>
@@ -65,37 +71,41 @@ export const EmployeeDetail = ({ employee, onBack }: EmployeeDetailProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
                 Age
               </label>
-              <p className="text-lg text-gray-900">{employee.age} years</p>
+              <p className="text-lg text-gray-900 dark:text-white">
+                {employee.age} years
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
                 Class
               </label>
-              <p className="text-lg text-gray-900">{employee.class}</p>
+              <p className="text-lg text-gray-900 dark:text-white">
+                {employee.class}
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-1">
+              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
                 Attendance
               </label>
               <div className="flex items-center gap-3">
-                <div className="flex-1 bg-gray-200 rounded-full h-3">
+                <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3">
                   <div
                     className={`h-3 rounded-full ${
                       employee.attendance >= 75
-                        ? 'bg-green-500'
+                        ? "bg-green-500"
                         : employee.attendance >= 50
-                        ? 'bg-yellow-500'
-                        : 'bg-red-500'
+                        ? "bg-yellow-500"
+                        : "bg-red-500"
                     }`}
                     style={{ width: `${employee.attendance}%` }}
                   />
                 </div>
-                <span className="text-lg font-semibold text-gray-900">
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">
                   {employee.attendance}%
                 </span>
               </div>
@@ -104,7 +114,7 @@ export const EmployeeDetail = ({ employee, onBack }: EmployeeDetailProps) => {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-2 flex items-center gap-2">
+              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 Subjects
               </label>
@@ -112,7 +122,7 @@ export const EmployeeDetail = ({ employee, onBack }: EmployeeDetailProps) => {
                 {employee.subjects.map((subject, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium"
+                    className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium"
                   >
                     {subject}
                   </span>
@@ -121,28 +131,32 @@ export const EmployeeDetail = ({ employee, onBack }: EmployeeDetailProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-2 flex items-center gap-2">
+              <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 Timeline
               </label>
               <div className="space-y-2">
                 <div>
-                  <span className="text-xs text-gray-500">Created:</span>
-                  <p className="text-sm text-gray-900">
-                    {new Date(employee.createdAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    Created:
+                  </span>
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    {new Date(employee.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
                     })}
                   </p>
                 </div>
                 <div>
-                  <span className="text-xs text-gray-500">Last Updated:</span>
-                  <p className="text-sm text-gray-900">
-                    {new Date(employee.updatedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    Last Updated:
+                  </span>
+                  <p className="text-sm text-gray-900 dark:text-white">
+                    {new Date(employee.updatedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
                     })}
                   </p>
                 </div>

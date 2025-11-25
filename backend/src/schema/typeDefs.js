@@ -64,6 +64,7 @@ export const typeDefs = `#graphql
       role: String
       class: String
       flagged: Boolean
+      search: String
     ): EmployeeList!
 
     employee(id: ID!): Employee

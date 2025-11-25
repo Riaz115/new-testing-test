@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
   query GetMe {
@@ -24,6 +24,7 @@ export const LIST_EMPLOYEES = gql`
     $role: String
     $class: String
     $flagged: Boolean
+    $search: String
   ) {
     listEmployees(
       page: $page
@@ -32,6 +33,7 @@ export const LIST_EMPLOYEES = gql`
       role: $role
       class: $class
       flagged: $flagged
+      search: $search
     ) {
       employees {
         id

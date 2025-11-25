@@ -1,10 +1,11 @@
-# Employee Management System - MERN + GraphQL
+# Employee Management System
 
 A full-stack employee management application built with React, Node.js, Express, GraphQL, and MongoDB.
 
 ## Tech Stack
 
 ### Frontend
+
 - React with TypeScript
 - Apollo Client for GraphQL
 - Tailwind CSS for styling
@@ -12,6 +13,7 @@ A full-stack employee management application built with React, Node.js, Express,
 - Vite as build tool
 
 ### Backend
+
 - Node.js with Express
 - Apollo Server for GraphQL
 - MongoDB with Mongoose
@@ -21,11 +23,13 @@ A full-stack employee management application built with React, Node.js, Express,
 ## Features
 
 ### Authentication & Authorization
+
 - JWT-based authentication
 - Role-based access control (Admin/Employee)
 - Protected routes and mutations
 
 ### UI Components
+
 - Responsive hamburger menu with submenu support
 - Horizontal navigation menu
 - Grid view for employee listing
@@ -35,6 +39,7 @@ A full-stack employee management application built with React, Node.js, Express,
 - Pagination support
 
 ### Employee Management
+
 - List employees with pagination
 - Filter by role, class, flagged status
 - Sort employees by any field
@@ -45,6 +50,7 @@ A full-stack employee management application built with React, Node.js, Express,
 - View detailed employee information
 
 ### Performance Optimizations
+
 - DataLoader to prevent N+1 queries
 - Database indexes on frequently queried fields
 - Pagination for large datasets
@@ -55,21 +61,25 @@ A full-stack employee management application built with React, Node.js, Express,
 ### Backend Setup
 
 1. Navigate to the backend directory:
+
    ```bash
    cd backend
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Create `.env` file:
+
    ```bash
    cp .env.example .env
    ```
 
 4. Configure environment variables in `.env`:
+
    ```
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_secret_key_here
@@ -77,6 +87,7 @@ A full-stack employee management application built with React, Node.js, Express,
    ```
 
 5. Start the backend server:
+
    ```bash
    npm run dev
    ```
@@ -86,11 +97,13 @@ A full-stack employee management application built with React, Node.js, Express,
 ### Frontend Setup
 
 1. From the project root directory, install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -103,16 +116,18 @@ To seed the database with sample data, you can use the GraphQL playground at `ht
 
 ```graphql
 mutation {
-  addEmployee(input: {
-    name: "Admin User"
-    email: "admin@example.com"
-    password: "admin123"
-    age: 30
-    class: "Administration"
-    subjects: ["Management", "Operations"]
-    attendance: 95
-    role: "admin"
-  }) {
+  addEmployee(
+    input: {
+      name: "Admin User"
+      email: "admin@example.com"
+      password: "admin123"
+      age: 30
+      class: "Administration"
+      subjects: ["Management", "Operations"]
+      attendance: 95
+      role: "admin"
+    }
+  ) {
     id
     name
     email
@@ -121,16 +136,18 @@ mutation {
 }
 
 mutation {
-  addEmployee(input: {
-    name: "John Doe"
-    email: "john@example.com"
-    password: "password123"
-    age: 28
-    class: "Engineering"
-    subjects: ["JavaScript", "React", "Node.js"]
-    attendance: 88
-    role: "employee"
-  }) {
+  addEmployee(
+    input: {
+      name: "John Doe"
+      email: "john@example.com"
+      password: "password123"
+      age: 28
+      class: "Engineering"
+      subjects: ["JavaScript", "React", "Node.js"]
+      attendance: 88
+      role: "employee"
+    }
+  ) {
     id
     name
     email
@@ -142,12 +159,14 @@ mutation {
 ## Login Credentials
 
 After seeding:
+
 - Admin: admin@example.com / admin123
 - Employee: john@example.com / password123
 
 ## Project Structure
 
 ### Frontend Structure
+
 ```
 src/
 ├── components/          # Reusable UI components
@@ -179,6 +198,7 @@ src/
 ```
 
 ### Backend Structure
+
 ```
 backend/src/
 ├── models/             # Mongoose models
@@ -200,11 +220,13 @@ backend/src/
 ## GraphQL API
 
 ### Queries
+
 - `listEmployees`: List all employees with pagination, filtering, and sorting
 - `employee(id)`: Get a single employee by ID
 - `me`: Get current authenticated user
 
 ### Mutations
+
 - `login`: Authenticate and get JWT token
 - `addEmployee`: Create a new employee (Admin only)
 - `updateEmployee`: Update employee details
@@ -214,11 +236,13 @@ backend/src/
 ## Building for Production
 
 ### Frontend
+
 ```bash
 npm run build
 ```
 
 ### Backend
+
 ```bash
 cd backend
 npm start
