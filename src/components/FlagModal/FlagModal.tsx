@@ -8,6 +8,7 @@ interface FlagModalProps {
   onConfirm: () => void;
   employeeName: string;
   isFlagged: boolean;
+  employeeRole?: string;
 }
 
 export const FlagModal = ({
@@ -16,7 +17,10 @@ export const FlagModal = ({
   onConfirm,
   employeeName,
   isFlagged,
+  employeeRole,
 }: FlagModalProps) => {
+  const isAdmin = employeeRole === "admin";
+  const roleText = isAdmin ? "Admin" : "Employee";
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="md">
       <div className="text-center py-4">
@@ -36,7 +40,7 @@ export const FlagModal = ({
           />
         </div>
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-          {isFlagged ? "Unflag Employee" : "Flag Employee"}
+          {isFlagged ? `Unflag ${roleText}` : `Flag ${roleText}`}
         </h3>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Are you sure you want to {isFlagged ? "unflag" : "flag"}{" "}

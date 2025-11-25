@@ -7,6 +7,7 @@ interface DeleteModalProps {
   onClose: () => void;
   onConfirm: () => void;
   employeeName: string;
+  employeeRole?: string;
 }
 
 export const DeleteModal = ({
@@ -14,7 +15,9 @@ export const DeleteModal = ({
   onClose,
   onConfirm,
   employeeName,
+  employeeRole,
 }: DeleteModalProps) => {
+  const isAdmin = employeeRole === "admin";
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="md">
       <div className="text-center py-4">
@@ -22,7 +25,7 @@ export const DeleteModal = ({
           <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" />
         </div>
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-          Delete Employee
+          {isAdmin ? "Delete Admin" : "Delete Employee"}
         </h3>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Are you sure you want to delete{" "}

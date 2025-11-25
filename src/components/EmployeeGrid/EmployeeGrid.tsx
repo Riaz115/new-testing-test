@@ -69,11 +69,9 @@ export const EmployeeGrid = ({
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                 Status
               </th>
-              {isAdmin && (onEdit || onFlag || onDelete) && (
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                  Actions
-                </th>
-              )}
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -134,28 +132,28 @@ export const EmployeeGrid = ({
                     {employee.flagged ? "Flag" : "Active"}
                   </span>
                 </td>
-                {isAdmin && (onEdit || onFlag || onDelete) && (
-                  <td className="px-4 py-4 whitespace-nowrap">
-                    <div className="relative">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowMenu(
-                            showMenu === employee.id ? null : employee.id
-                          );
-                        }}
-                        className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-                      >
-                        <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                      </button>
+                <td className="px-4 py-4 whitespace-nowrap">
+                  <div className="relative">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowMenu(
+                          showMenu === employee.id ? null : employee.id
+                        );
+                      }}
+                      className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    </button>
 
-                      {showMenu === employee.id && (
-                        <>
-                          <div
-                            className="fixed inset-0 z-10"
-                            onClick={() => setShowMenu(null)}
-                          />
-                          <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-20">
+                    {showMenu === employee.id && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-10"
+                          onClick={() => setShowMenu(null)}
+                        />
+                        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-20">
+                          {onEmployeeClick && (
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -169,57 +167,57 @@ export const EmployeeGrid = ({
                               <Eye className="w-4 h-4" />
                               View
                             </button>
-                            {onEdit && (
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleMenuAction(
-                                    () => onEdit(employee),
-                                    employee.id
-                                  );
-                                }}
-                                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                              >
-                                <Edit className="w-4 h-4" />
-                                Edit
-                              </button>
-                            )}
-                            {onFlag && (
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleMenuAction(
-                                    () => onFlag(employee),
-                                    employee.id
-                                  );
-                                }}
-                                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                              >
-                                <Flag className="w-4 h-4" />
-                                {employee.flagged ? "Unflag" : "Flag"}
-                              </button>
-                            )}
-                            {onDelete && (
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleMenuAction(
-                                    () => onDelete(employee),
-                                    employee.id
-                                  );
-                                }}
-                                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                                Delete
-                              </button>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </td>
-                )}
+                          )}
+                          {isAdmin && onEdit && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleMenuAction(
+                                  () => onEdit(employee),
+                                  employee.id
+                                );
+                              }}
+                              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            >
+                              <Edit className="w-4 h-4" />
+                              Edit
+                            </button>
+                          )}
+                          {isAdmin && onFlag && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleMenuAction(
+                                  () => onFlag(employee),
+                                  employee.id
+                                );
+                              }}
+                              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            >
+                              <Flag className="w-4 h-4" />
+                              {employee.flagged ? "Unflag" : "Flag"}
+                            </button>
+                          )}
+                          {isAdmin && onDelete && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleMenuAction(
+                                  () => onDelete(employee),
+                                  employee.id
+                                );
+                              }}
+                              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                              Delete
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

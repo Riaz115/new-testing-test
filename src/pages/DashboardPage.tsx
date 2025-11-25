@@ -486,6 +486,7 @@ export const DashboardPage = () => {
         }}
         onConfirm={handleDeleteConfirm}
         employeeName={employeeToDelete?.name || ""}
+        employeeRole={employeeToDelete?.role}
       />
 
       <FlagModal
@@ -497,6 +498,7 @@ export const DashboardPage = () => {
         onConfirm={handleFlagConfirm}
         employeeName={employeeToFlag?.name || ""}
         isFlagged={employeeToFlag?.flagged || false}
+        employeeRole={employeeToFlag?.role}
       />
     </div>
   );

@@ -52,7 +52,7 @@ export const EmployeeTile = ({
               {employee.email}
             </p>
           </div>
-          {(isAdmin ? onView || onEdit || onFlag || onDelete : onView) && (
+          {onView && (
             <div className="relative">
               <button
                 onClick={(e) => {
